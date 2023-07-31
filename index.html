@@ -10,13 +10,25 @@
   </head>
   <body>
     <h1>Your Shopping list</h1>
+    <section class="budget"> 
+      <p class="budget-form">Enter your budget here:</p>
+      <input class="budget-number" type="text" placeholder="Your budget (₺)" />
+      <button class="btn check">OK!</button>
+    </section>
 
-    <p class="budget-form">Enter your budget here:</p>
-    <input class="budget" type="text" placeholder="Your budget (₺)" />
-    <button class="btn check">OK!</button>
+    <section class="lists"> 
+      <h3>Start doing your own shopping list!</h3>
+      <button class="btn-list">Add a list!</button> 
+        <section class="elements"> 
+          <button class="btn-element">Create your list!</button> 
+        </section>
+      <div class="current-lists"> 
+        <button class="all-lists">All</button>
+        <button class="favorite-lists">Favorites</button>
+        <button class="last-added-items">Last used items</button>
+      </div>
+    </section>
 
-    <h3>Start doing your own shopping list!</h3>
-    <button class="btn again">Add a list!</button>
 
     <script src="script.js"></script>
   </body>
