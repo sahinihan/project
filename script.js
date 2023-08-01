@@ -1,16 +1,44 @@
-const allLists = document.querySelector('.all-lists')
-const favorites = document.querySelector('.favorite-lists')
-const lastAdded = document.querySelector('.last-added-items')
+"use strict";
 
-const budget = document.querySelector(".budget").textContent;
+let budget = document.querySelector(".budget-number");
+let budgetInfo = document.querySelector(".known-budget").textContent;
+let changeBudget = document.querySelector(".changing-the-budget");
+let btnChange = document.querySelector(".change-known-budget");
 
-document.querySelector(".check").addEventListener("click", function () {
-  const budget = Number(document.querySelector(".budget").value);
-  console.log(budget, typeof budget);
-})
+const hide = function (thing) {
+  document.querySelector(thing).classList.add("hidden");
+};
 
-//const currentBudget = document.querySelector(".known-budget").classList.add('hidden')
+hide(".known-budget");
+hide(".change-known-budget");
+hide(".changing-the-budget");
 
-//const changeBudget = document.querySelector(".changing-the-budget").classList.add('hidden')
+// recieving initial budget and portraying it
+document.querySelector(".budget-check").addEventListener("click", function () {
+  let budget = Number(document.querySelector(".budget-number").value);
+  document.querySelector(".known-budget").classList.remove("hidden");
+  document.querySelector(
+    ".known-budget"
+  ).textContent = `${budgetInfo} ${budget} Turkish liras`;
+  hide(".budget-form");
+  hide(".budget-number");
+  hide(".budget-check");
+  btnChange.classList.remove("hidden");
+});
 
-//const itemForm = document.querySelector(".add-items-form").classList.add('hidden')
+// changing the budget
+document
+  .querySelector(".change-known-budget")
+  .addEventListener("click", function () {
+    changeBudget.classList.remove("hidden");
+    document
+      .querySelector(".changed-budget-check")
+      .addEventListener("click", function () {
+        let budget = Number(document.querySelector(".changed-budget").value);
+        console.log(budget);
+        document.querySelector(
+          ".known-budget"
+        ).textContent = `${budgetInfo} ${budget} Turkish liras`;
+        hide(".changing-the-budget");
+      });
+  });
