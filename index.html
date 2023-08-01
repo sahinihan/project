@@ -39,36 +39,38 @@
         <p> Add items to your list, </p>
         <button class="btn add-elements"> + </button>
 
-      <section class="add-items-form">
-        <p class="item-form">Enter your item name here:</p>
-        <input class="item-name" type="text" placeholder="Your item" />
-        <button class="btn item-name-check">OK!</button>
-        <button class="btn more-info"> Add more information</button>
+        <section class="add-items-form">
+          <p class="item-form">Enter your item name here:</p>
+          <input class="item-name" type="text" placeholder="Your item" />
+          <button class="btn item-name-check">OK!</button>
+          <button class="btn more-info"> Add more information</button>
+
+            <section>
+              <input class="item-amount" type="text" placeholder="the amount of your item" />
+              <button class="btn amount-check">OK!</button>
+              <input class="item-price" type="text" placeholder="the price of your item (₺)" />
+              <button class="btn price-check">OK!</button>
+            </section>
+        </section>
+
           <section>
-            <input class="item-amount" type="text" placeholder="the amount of your item" />
-            <button class="btn amount-check">OK!</button>
-            <input class="item-price" type="text" placeholder="the price of your item (₺)" />
-            <button class="btn price-check">OK!</button>
+            <button class="btn last-added-items">Last added items</button>
+            <p class="p-last-items">Your last added items:</p>
           </section>
-        <button class="btn last-added-items">Last used items</button>
-        <p class="p-last-items">Your last used items:</p>
+
       </section>
 
-     </section>
-
-    
-
     </section>
-
+  
     <section class="lists">
-      <p class="users-lists"> Your Lists: </p> 
-      <div class="current-lists"> 
-        <button class="all-lists">All</button>
-        <button class="favorite-lists">Favorites</button>
-      </div>
+    <p class="users-lists"> Your Lists: </p> 
+    <div class="current-lists"> 
+      <button class="all-lists">All</button>
+      <p class="p-all-lists"> Your lists:</p>
+      <button class="favorite-lists">Favorites</button>
+      <p class="p-favorites"> Yout favorited lists:</p>
+    </div>
     </section>
-
-
 
     <script src="script.js"></script>
   </body>
