@@ -9,5 +9,8 @@ document.querySelector(".check").addEventListener("click", function () {
   console.log(budget, typeof budget);
 })
 
-const elements = document.querySelector(".elements").classList.add('hidden')
+//const currentBudget = document.querySelector(".known-budget").classList.add('hidden')
 
+//const changeBudget = document.querySelector(".changing-the-budget").classList.add('hidden')
+
+//const itemForm = document.querySelector(".add-items-form").classList.add('hidden')

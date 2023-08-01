@@ -10,24 +10,64 @@
   </head>
   <body>
     <h1>Your Shopping list</h1>
+
     <section class="budget"> 
       <p class="budget-form">Enter your budget here:</p>
       <input class="budget-number" type="text" placeholder="Your budget (₺)" />
-      <button class="btn check">OK!</button>
+      <button class="btn budget-check">OK!</button>
+
+      <p class="known-budget"> Your budget is: </p>
     </section>
 
-    <section class="lists"> 
-      <h3>Start doing your own shopping list!</h3>
-      <button class="btn-list">Add a list!</button> 
-        <section class="elements"> 
-          <button class="btn-element">Create your list!</button> 
-        </section>
+    <section class="changing-the-budget"> 
+      <button class="btn change-known-budget"> Change your budget </button>
+      <p class="change-budget-form">Enter your new budget here:</p>
+      <input class="changed-budget" type="text" placeholder="Your new budget (₺)" />
+    </section>
+  </body>
+
+  <body>
+    <h3>Start doing your own shopping list!</h3>
+
+    <section > 
+      <button class="btn-create-list">Create a list!</button> 
+      <p class="p-list-name"> The name of your shopping list:</p>
+      <input class="list-name" type="text"/>
+      <button class="btn list-name-check">OK!</button>
+
+      <section class="adding-items"> 
+        <p> Add items to your list, </p>
+        <button class="btn add-elements"> + </button>
+
+      <section class="add-items-form">
+        <p class="item-form">Enter your item name here:</p>
+        <input class="item-name" type="text" placeholder="Your item" />
+        <button class="btn item-name-check">OK!</button>
+        <button class="btn more-info"> Add more information</button>
+          <section>
+            <input class="item-amount" type="text" placeholder="the amount of your item" />
+            <button class="btn amount-check">OK!</button>
+            <input class="item-price" type="text" placeholder="the price of your item (₺)" />
+            <button class="btn price-check">OK!</button>
+          </section>
+        <button class="btn last-added-items">Last used items</button>
+        <p class="p-last-items">Your last used items:</p>
+      </section>
+
+     </section>
+
+    
+
+    </section>
+
+    <section class="lists">
+      <p class="users-lists"> Your Lists: </p> 
       <div class="current-lists"> 
         <button class="all-lists">All</button>
         <button class="favorite-lists">Favorites</button>
-        <button class="last-added-items">Last used items</button>
       </div>
     </section>
+
 
 
     <script src="script.js"></script>
