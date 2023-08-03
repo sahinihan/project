@@ -9,17 +9,18 @@
     <title>Shopping List</title>
   </head>
   <body>
-    <h1>Your Shopping list</h1>
+    <h1>Your Shopping List</h1>
 
-    <section class="budget"> 
+  <section class="budget">
+    <section class="assign-budget"> 
       <p class="budget-form">Enter your budget here:</p>
       <input class="budget-number" type="text" placeholder="Your budget (₺)" />
       <button class="btn budget-check">OK!</button>
     </section>
 
-    <p class="known-budget"> Your budget is: </p>
+    <p class="known-budget"> Your budget is </p>
 
-    <section> 
+    <section class="budget-change"> 
       <button class="btn change-known-budget"> Change your budget </button>
       <section class="changing-the-budget">
         <p class="change-budget-form">Enter your new budget here:</p>
@@ -27,6 +28,7 @@
         <button class="btn changed-budget-check">OK!</button>
       </section>
     </section>
+  </section>
   </body>
 
   <body>
@@ -66,15 +68,14 @@
     </section>
   
     <section class="lists">
-    <p class="users-lists"> Your Lists: </p> 
     <div class="current-lists"> 
-      <button class="all-lists">All</button>
       <p class="p-all-lists"> Your lists:</p>
+      <button class="all-lists">All</button>
       <button class="favorite-lists">Favorites</button>
-      <p class="p-favorites"> Yout favorited lists:</p>
     </div>
     </section>
 
     <script src="script.js"></script>
+    <script src="style.css"></script>
   </body>
 </html>

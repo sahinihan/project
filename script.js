@@ -14,20 +14,22 @@ hide(".change-known-budget");
 hide(".changing-the-budget");
 
 // recieving initial budget and portraying it
-document.querySelector(".budget-check").addEventListener("click", function () {
-  let budget = Number(document.querySelector(".budget-number").value);
-  document.querySelector(".known-budget").classList.remove("hidden");
-  document.querySelector(
-    ".known-budget"
-  ).textContent = `${budgetInfo} ${budget} Turkish liras`;
-  hide(".budget-form");
-  hide(".budget-number");
-  hide(".budget-check");
-  btnChange.classList.remove("hidden");
-});
+const assignBudget = document
+  .querySelector(".budget-check")
+  .addEventListener("click", function () {
+    let budget = Number(document.querySelector(".budget-number").value);
+    document.querySelector(".known-budget").classList.remove("hidden");
+    document.querySelector(
+      ".known-budget"
+    ).textContent = `${budgetInfo} ${budget} Turkish liras`;
+    hide(".budget-form");
+    hide(".budget-number");
+    hide(".budget-check");
+    btnChange.classList.remove("hidden");
+  });
 
 // changing the budget
-document
+const change = (budget = document
   .querySelector(".change-known-budget")
   .addEventListener("click", function () {
     changeBudget.classList.remove("hidden");
@@ -41,4 +43,6 @@ document
         ).textContent = `${budgetInfo} ${budget} Turkish liras`;
         hide(".changing-the-budget");
       });
-  });
+  }));
+
+

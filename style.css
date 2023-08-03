@@ -2,5 +2,112 @@
 
 .hidden {
     display: none;
+    visibility: hidden;
   }
 
+* {
+  margin: 7;
+} 
+
+body {
+  font-family: 'Press Start 2P', sans-serif;
+  background-color: #a8bec4;
+  /* background-color: #60b347; */
+}
+
+h1 {
+  text-align: center;
+  font-family: monospace;
+  font-size: 45px;
+  color: #1a2c53
+}
+
+.assign-budget {
+  position: absolute;
+  padding: 15px;
+  margin: 15px;
+  top: 75px;
+  right: 100px;
+  width: 250px;
+  height: 80px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  vertical-align: baseline;
+  background-color: #fbd1a2;
+  border-radius: 100px;
+  border-style: double;
+  border-width: 10px;
+  border-color: #f79256;
+}
+
+.known-budget {
+  position: absolute;
+  padding: 20px;
+  margin: 15px;
+  top: 90px;
+  right: 97px;
+  width: 270px;
+  text-align: center;
+}
+
+.budget-number {
+  background-color: rgb(196, 223, 242);
+  border-color: rgb(196, 223, 242);
+  color: #1a2c53
+}
+
+.budget-number::placeholder {
+  background-color: rgb(196, 223, 242);
+  color: #1a2c53
+}
+
+.budget-check {
+  background-color: #ee6c4d;
+}
+
+.change-known-budget {
+position: absolute;
+  margin-top: 30;
+  right: 175px;
+  top: 160px;
+  text-align: center;
+  background-color: rgb(196, 223, 242);
+  font-size: 15px;
+  width: 175px;
+  border-radius: 40px;
+}
+
+.change-known-budget:hover {
+  background-color: rgb(26, 69, 121);
+  color: rgb(223, 240, 255);
+}
+
+.changing-the-budget {
+  position: absolute;
+  padding: 15px;
+  margin: 15px;
+  top: 220px;
+  right: 105px;
+  width: 245px;
+  height: 70px;
+  text-align: center;
+  background-color: #fbd1a2;
+  border-radius: 100px;
+  border-style: double;
+  border-width: 10px;
+  border-color: #f79256;
+}
+
+.change-budget-form {
+  margin-top: 6px;
+}
+
+.changed-budget {
+background-color: rgb(196, 223, 242);
+border-color: rgb(196, 223, 242);
+color: #1a2c53
+}
+
+.changed-budget-check {
+  background-color: #ee6c4d;
+}
