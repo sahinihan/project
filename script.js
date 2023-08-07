@@ -5,24 +5,29 @@ const hide = function (arr) {
 };
 
 const removeHidden = function (arr) {
-  for (let part2 of arr) document.querySelector(part2).classList.remove("hidden");
+  for (let part2 of arr)
+    document.querySelector(part2).classList.remove("hidden");
 };
 
 //hidden content when restarted
 hide([".known-budget", ".change-known-budget", ".changing-the-budget"]);
 hide([".p-list-name", ".list-name", ".list-name-check", ".btn-add-elements"]);
 hide([".add-item-form", ".item-form", ".item-name"]);
-hide([".more-info", ".item-amount", ".amount-check", ".item-price", ".price-check"]);
+hide([
+  ".more-info",
+  ".item-amount",
+  ".amount-check",
+  ".item-price",
+  ".price-check",
+]);
 hide([".p-last-items", ".last-added-items", ".add-the-item"]);
 hide([".current-list", ".save-list", ".item-name-check"]);
 hide([".current-list", ".current-list-name", ".current-list-items"]);
-
 
 let budget = document.querySelector(".budget-number");
 let budgetInfo = document.querySelector(".known-budget").textContent;
 let changeBudget = document.querySelector(".changing-the-budget");
 let btnChange = document.querySelector(".change-known-budget");
-
 
 // recieving initial budget and portraying it
 const assignBudget = document
@@ -57,21 +62,44 @@ const change = (budget = document
 const createList = document
   .querySelector(".btn-create-list")
   .addEventListener("click", function () {
-    removeHidden([".p-list-name", ".list-name", ".list-name-check", ".btn-add-elements", ".add-item-form", ".save-list"]);
+    removeHidden([
+      ".p-list-name",
+      ".list-name",
+      ".list-name-check",
+      ".btn-add-elements",
+      ".add-item-form",
+      ".save-list",
+    ]);
   });
 
 const addItems = document
   .querySelector(".btn-add-elements")
   .addEventListener("click", function () {
-    removeHidden([".item-form", ".item-name", ".item-name-check", ".more-info", ".last-added-items", ".add-the-item"]);
+    removeHidden([
+      ".item-form",
+      ".item-name",
+      ".item-name-check",
+      ".more-info",
+      ".last-added-items",
+      ".add-the-item",
+    ]);
   });
 
 const addAdditionalInfo = document
   .querySelector(".more-info")
   .addEventListener("click", function () {
-    removeHidden([".item-amount", ".amount-check", ".item-price", ".price-check"]);
+    removeHidden([
+      ".item-amount",
+      ".amount-check",
+      ".item-price",
+      ".price-check",
+    ]);
   });
 
+let listName = document.querySelector(".list-name").value;
+
+
+// Assign list name
 const asignName = document
   .querySelector(".list-name-check")
   .addEventListener("click", function () {
@@ -81,10 +109,16 @@ const asignName = document
     console.log(listName);
   });
 
-  let itemAmount = document.querySelector(".item-amount").value
-  let itemPrice = document.querySelector(".item-price").value
+let itemAmount = document.querySelector(".item-amount").value;
+let itemPrice = document.querySelector(".item-price").value;
+let itemInfo = document.querySelector(".item-info").textContent;
+let itemName = String(document.querySelector(".item-name").value);
+
+let items = [];
+let itemInformations = [];
 
 
+// assign item name and add to the items array(list)
 const asignItem = document
   .querySelector(".add-the-item")
   .addEventListener("click", function () {
@@ -92,8 +126,30 @@ const asignItem = document
     removeHidden([".first-item", ".current-list-items"]);
     document.querySelector(".first-item").textContent = itemName;
     console.log(itemName);
-    if (itemPrice == false && itemAmount == false) {
-      document.querySelector(".item-info").textContent = "No item information"
-    }
+    items.push(itemName);
+    console.log(items);
   });
 
+// assign item info
+const assignItemInfo = document
+  .querySelector(".add-the-item")
+  .addEventListener("click", function () {
+    let itemAmount = Boolean(document.querySelector(".item-amount").value);
+    let itemPrice = Boolean(document.querySelector(".item-price").value);
+
+    if (itemPrice == false && itemAmount == false) {
+      document.querySelector(".item-info").textContent = "No item information";
+    } else if (itemAmount == false && itemPrice == true) {
+      document.querySelector(".item-info").textContent = `price: ${
+        document.querySelector(".item-price").value
+      }₺`;
+    } else if (itemPrice == false && itemAmount == true) {
+      document.querySelector(".item-info").textContent = `amount: ${
+        document.querySelector(".item-amount").value
+      }`;
+    } else if (itemAmount == true && itemPrice == true) {
+      document.querySelector(".item-info").textContent = `amount: ${
+        document.querySelector(".item-amount").value
+      }, price: ${document.querySelector(".item-price").value}₺`;
+    }
+  });
