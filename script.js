@@ -64,6 +64,7 @@ const asignName = document
   .querySelector(".btn-create-list")
   .addEventListener("click", function () {
     removeHidden([".p-list-name", ".list-name", ".list-name-check"]);
+    hide([".btn-create-list"])
   });
 
 const ShowListName = document
@@ -82,7 +83,9 @@ const list = document.querySelector("dl");
 const itemInput = document.querySelector(".item-name");
 const itemButton = document.querySelector(".item-name-check");
 const priceInput = document.createElement("input");
+priceInput.classList.add("price-input")
 const amountInput = document.createElement("input");
+amountInput.classList.add("amount-input")
 let items = [];
 let deletedItems = [];
 
@@ -94,13 +97,19 @@ itemButton.addEventListener("click", function () {
     items.push(itemInput.value);
 
     const listItem = document.createElement("dt");
+    listItem.classList.add("list-of-items")
     const listText = document.createElement("span");
+    listText.classList.add("item-names")
     const listBtn = document.createElement("button");
+    listBtn.classList.add("delete-btn")
     const infoBtn = document.createElement("button");
+    infoBtn.classList.add("info-btn")
 
     const infoList = document.createElement("dd");
     const priceBtn = document.createElement("button");
+    priceBtn.classList.add("price-btn")
     const amountBtn = document.createElement("button");
+    amountBtn.classList.add("amount-btn")
 
     listItem.appendChild(listText);
     listItem.appendChild(listText);
@@ -117,7 +126,7 @@ itemButton.addEventListener("click", function () {
     // TO-DO adding more info about the items
     const endAddingInfo = document.createElement("button");
 
-    const addInfoFunction = infoBtn.addEventListener("click", () => {
+    infoBtn.addEventListener("click", () => {
       infoList.appendChild(priceBtn);
       priceBtn.textContent = "price (₺)";
       priceBtn.appendChild(priceInput);
@@ -126,12 +135,15 @@ itemButton.addEventListener("click", function () {
       amountBtn.appendChild(amountInput);
       infoList.appendChild(endAddingInfo);
       endAddingInfo.textContent = "Done";
+      endAddingInfo.classList.add("done-btn")
 
       listItem.removeChild(infoBtn);
     });
 
     const displayInfo = document.createElement("span");
+    displayInfo.classList.add("displayed-info")
     const changeInfoBtn = document.createElement("button")
+    changeInfoBtn.classList.add("change-info-btn")
 
     endAddingInfo.addEventListener("click", () => {
 
@@ -187,9 +199,12 @@ itemButton.addEventListener("click", function () {
   }
 });
 
+
+
 document.querySelector(".save-list").addEventListener("click", () => { 
   // console.log(items)
   // console.log(deletedItems)
   // console.log(list)
+
 })
 

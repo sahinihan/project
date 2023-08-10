@@ -86,10 +86,10 @@ position: absolute;
   position: absolute;
   padding: 15px;
   margin: 15px;
-  top: 220px;
-  right: 105px;
-  width: 245px;
-  height: 70px;
+  top: 75px;
+  right: 100px;
+  width: 250px;
+  height: 80px;
   text-align: center;
   background-color: #fbd1a2;
   border-radius: 100px;
@@ -99,7 +99,7 @@ position: absolute;
 }
 
 .change-budget-form {
-  margin-top: 6px;
+  margin-top: 10px;
 }
 
 .changed-budget {
@@ -110,4 +110,120 @@ color: #1a2c53
 
 .changed-budget-check {
   background-color: #ee6c4d;
+}
+
+
+.create-list-title {
+  color:#1a2c53;
+  margin-left: 100px
+}
+
+.btn-create-list{
+  background-color: #ffb703;
+  width: 120px;
+  height: 50px;
+  margin-left: 192px
+}
+
+.p-list-name{
+  margin-left: 65px;
+}
+
+.list-name-check{
+  color:#1a2c53;
+  background-color: #ee6c4d;
+}
+
+.list-name {
+  background: #fbd1a2;
+  border-color: #219ebc;
+}
+
+.list-item {
+  margin-left: 123px;
+  margin-top: 20px
+}
+
+.item-name{
+  background: #fbd1a2;
+  border-color: #219ebc;
+}
+
+.item-name-check{
+  color:#1a2c53;
+  background-color: #ee6c4d;
+}
+
+.List-Name {
+  margin-left: 175px;
+  margin-top: 20px;
+  padding-top: 8px;
+  width: 190px;
+  height: 25px;
+  text-align: center;
+  background-color: #8ecae6;
+}
+
+.list-of-items {
+  margin-left: 100px;
+  margin-bottom: 5px;
+}
+
+.item-names {
+  margin: 3px
+}
+
+.delete-btn {
+  margin: 7px;
+  background-color: #8ecae6;
+  border-radius: 15px;
+}
+
+.info-btn {
+  margin: 7px;
+  background-color: #219ebc;
+  height: 30px;
+  border-radius: 40px;
+}
+
+.price-btn {
+  background-color: #219ebc;
+  margin: 5px;
+  margin-left: 100px;
+}
+
+.amount-btn {
+  background-color: #219ebc;
+  margin: 5px;
+}
+
+.price-input {
+  background-color: #fbd1a2;
+  border-color: #219ebc;
+}
+
+.amount-input {
+  background-color: #fbd1a2;
+  border-color: #219ebc;
+}
+
+.done-btn {
+  background-color: #ee6c4d;
+}
+
+.displayed-info {
+  margin: 5px;
+  margin-left: 100px;
+}
+
+.change-info-btn{
+  margin: 10px;
+  background-color: #219ebc;
+  border-radius: 40px;
+}
+
+.save-list {
+  margin-left: 375px;
+  background-color:#1a2c53;
+  color:#d2e5e5
 }
