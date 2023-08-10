@@ -83,8 +83,10 @@ const list = document.querySelector("dl");
 const itemInput = document.querySelector(".item-name");
 const itemButton = document.querySelector(".item-name-check");
 const priceInput = document.createElement("input");
+priceInput.type = "number"
 priceInput.classList.add("price-input")
 const amountInput = document.createElement("input");
+amountInput.type = "number"
 amountInput.classList.add("amount-input")
 let items = [];
 let deletedItems = [];
@@ -128,7 +130,7 @@ itemButton.addEventListener("click", function () {
 
     infoBtn.addEventListener("click", () => {
       infoList.appendChild(priceBtn);
-      priceBtn.textContent = "price (₺)";
+      priceBtn.textContent = "unit price (₺)";
       priceBtn.appendChild(priceInput);
       infoList.appendChild(amountBtn);
       amountBtn.textContent = "amount";
@@ -154,14 +156,18 @@ itemButton.addEventListener("click", function () {
       infoList.removeChild(endAddingInfo);
 
       // remove inputs and replace them with the values
+      let unitPrice = priceInput.value
+      let amount = amountInput.value
+      let totalPrice = unitPrice * amountInput.value
+
       infoList.appendChild(displayInfo);
 
       if (amountInput.value !== "" && priceInput.value !== "") {
-        displayInfo.textContent = `price: ${priceInput.value}(₺), amount: ${amountInput.value}`;
+        displayInfo.textContent = `total price: ${totalPrice}(₺), amount: ${amount}`;
       } else if (amountInput.value !== "") {
         displayInfo.textContent = `amount: ${amountInput.value}`;
       } else if (priceInput.value !== "") {
-        displayInfo.textContent = `price: ${priceInput.value}(₺)`;
+        displayInfo.textContent = `price: ${totalPrice}(₺)`;
       }
 
       displayInfo.appendChild(changeInfoBtn)
@@ -177,6 +183,9 @@ itemButton.addEventListener("click", function () {
         endAddingInfo.textContent = "Done";
 
         displayInfo.removeChild(changeInfoBtn);
+        console.log(typeof unitPrice)
+        console.log(typeof amountInput.value)
+        console.log(amount)
       })
       
 
