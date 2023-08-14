@@ -2,11 +2,11 @@
 
 .hidden {
     display: none;
-    visibility: hidden;
   }
 
 * {
   margin: 7;
+  box-sizing: border-box;
 } 
 
 body {
@@ -17,19 +17,26 @@ body {
 
 h1 {
   text-align: center;
+  margin-right:400px;
+  margin-left:400px;
   font-family: monospace;
   font-size: 45px;
   color: #1a2c53
 }
 
+.budget {
+  float: right;
+  width: 400px;
+  justify-content: flex-end;
+}
+
+
 .assign-budget {
-  position: absolute;
-  padding: 15px;
-  margin: 15px;
-  top: 75px;
-  right: 100px;
-  width: 250px;
-  height: 80px;
+  width: 270px;
+  height:115px;
+  position: relative;
+  margin-right: 20px;  
+  margin-left: 30px;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
   vertical-align: baseline;
@@ -41,19 +48,26 @@ h1 {
 }
 
 .known-budget {
-  position: absolute;
-  padding: 20px;
-  margin: 15px;
-  top: 90px;
-  right: 97px;
-  width: 270px;
+  width: 290px;
+  height: 60px;
+  padding:12px;
+  margin: 20px;
+  margin-top: 10px;
   text-align: center;
+  position:relative;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #fbd1a2;
+  border-radius: 100px;
+  border-style: double;
+  border-width: 10px;
+  border-color: #f79256;
 }
+
 
 .budget-number {
   background-color: rgb(196, 223, 242);
   border-color: rgb(196, 223, 242);
-  color: #1a2c53
+  color: #1a2c53;
 }
 
 .budget-number::placeholder {
@@ -66,14 +80,10 @@ h1 {
 }
 
 .change-known-budget {
-position: absolute;
-  margin-top: 30;
-  right: 175px;
-  top: 160px;
-  text-align: center;
-  background-color: rgb(196, 223, 242);
+  width: 170px;
+  margin-left: 80px;
+  background-color: #ee6c4d;
   font-size: 15px;
-  width: 175px;
   border-radius: 40px;
 }
 
@@ -83,13 +93,10 @@ position: absolute;
 }
 
 .changing-the-budget {
-  position: absolute;
-  padding: 15px;
-  margin: 15px;
-  top: 75px;
-  right: 100px;
-  width: 250px;
-  height: 80px;
+  width: 300px;
+  height: 100px;
+  margin-top: 17px;
+  margin-left: 13px;
   text-align: center;
   background-color: #fbd1a2;
   border-radius: 100px;
@@ -114,12 +121,14 @@ color: #1a2c53
 
 
 .create-list-title {
+  position: relative;
   color:#1a2c53;
-  margin-left: 100px
+  margin-left: 100px;
 }
 
 .btn-create-list{
-  background-color: #ffb703;
+  background-color: #f79256;
+  font-size: 17px;
   width: 120px;
   height: 50px;
   margin-left: 192px
@@ -198,11 +207,13 @@ color: #1a2c53
 }
 
 .price-input {
+  position: relative;
   background-color: #fbd1a2;
   border-color: #219ebc;
 }
 
 .amount-input {
+  position: relative;
   background-color: #fbd1a2;
   border-color: #219ebc;
 }
@@ -227,3 +238,4 @@ color: #1a2c53
   background-color:#1a2c53;
   color:#d2e5e5
 }
+

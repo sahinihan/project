@@ -15,8 +15,6 @@ hide([".p-list-name", ".list-name", ".list-name-check", ".List-Name"]);
 hide([".list-item", ".last-added-items"]);
 hide([".save-list"]);
 
-
-
 let budget = document.querySelector(".budget-number");
 let budgetInfo = document.querySelector(".known-budget").textContent;
 let changeBudget = document.querySelector(".changing-the-budget");
@@ -31,15 +29,16 @@ const assignBudget = document
     document.querySelector(
       ".known-budget"
     ).textContent = `${budgetInfo} ${budget} Turkish liras`;
-    hide([".budget-form", ".budget-number", ".budget-check"]);
-    btnChange.classList.remove("hidden");
+    hide([".budget-form", ".budget-number", ".budget-check", ".assign-budget"]);
+
+    removeHidden([".change-known-budget"]);
   });
 
 // changing the budget
 const change = (budget = document
   .querySelector(".change-known-budget")
   .addEventListener("click", function () {
-    changeBudget.classList.remove("hidden");
+    removeHidden([".changing-the-budget"]);
     document
       .querySelector(".changed-budget-check")
       .addEventListener("click", function () {
@@ -47,12 +46,10 @@ const change = (budget = document
         console.log(budget);
         document.querySelector(
           ".known-budget"
-        ).textContent = `${budgetInfo} ${budget} Turkish liras`;
+        ).textContent = `${budgetInfo} ${budget} Turkish liras `;
         hide([".changing-the-budget"]);
       });
   }));
-
-
 
 const listName = document.querySelector(".p-list-name");
 const listNameInput = document.querySelector(".list-name");
@@ -64,7 +61,7 @@ const asignName = document
   .querySelector(".btn-create-list")
   .addEventListener("click", function () {
     removeHidden([".p-list-name", ".list-name", ".list-name-check"]);
-    hide([".btn-create-list"])
+    hide([".btn-create-list"]);
   });
 
 const ShowListName = document
@@ -77,20 +74,43 @@ const ShowListName = document
     }
   });
 
-
-
 const list = document.querySelector("dl");
 const itemInput = document.querySelector(".item-name");
 const itemButton = document.querySelector(".item-name-check");
-const priceInput = document.createElement("input");
-priceInput.type = "number"
-priceInput.classList.add("price-input")
-const amountInput = document.createElement("input");
-amountInput.type = "number"
-amountInput.classList.add("amount-input")
+const categoryBtn = document.querySelector("#radio-btn");
 let items = [];
 let deletedItems = [];
 
+    //adding categories
+    const categories = {
+      Cleaning: false,
+      Clothes: false,
+      Food: false,
+      Accesories: false,
+      Health: false,
+      Beauty: false,
+      Technology: false,
+    };
+
+    for (let key in categories) {
+      let label = document.createElement("label");
+      label.innerText = key;
+      let input = document.createElement("input");
+      input.type = "radio";
+      input.name = "category-inputs"
+      categoryBtn.appendChild(label)
+
+      input.addEventListener("click", () => {
+        Object.keys(categories).forEach(key => {
+          categories[key] = false
+        })
+        categories[key] = true
+      });
+
+      label.appendChild(input);
+
+      // input.addEventListener("click", () => {console.log(categories)})
+    }
 
 // adding items to the list
 itemButton.addEventListener("click", function () {
@@ -99,19 +119,26 @@ itemButton.addEventListener("click", function () {
     items.push(itemInput.value);
 
     const listItem = document.createElement("dt");
-    listItem.classList.add("list-of-items")
+    listItem.classList.add("list-of-items");
     const listText = document.createElement("span");
-    listText.classList.add("item-names")
+    listText.classList.add("item-names");
     const listBtn = document.createElement("button");
-    listBtn.classList.add("delete-btn")
+    listBtn.classList.add("delete-btn");
     const infoBtn = document.createElement("button");
-    infoBtn.classList.add("info-btn")
+    infoBtn.classList.add("info-btn");
 
     const infoList = document.createElement("dd");
     const priceBtn = document.createElement("button");
-    priceBtn.classList.add("price-btn")
+    priceBtn.classList.add("price-btn");
     const amountBtn = document.createElement("button");
-    amountBtn.classList.add("amount-btn")
+    amountBtn.classList.add("amount-btn");
+
+    const priceInput = document.createElement("input");
+    priceInput.type = "number";
+    priceInput.classList.add("price-input");
+    const amountInput = document.createElement("input");
+    amountInput.type = "number";
+    amountInput.classList.add("amount-input");
 
     listItem.appendChild(listText);
     listItem.appendChild(listText);
@@ -123,32 +150,36 @@ itemButton.addEventListener("click", function () {
     list.appendChild(listItem);
     list.appendChild(infoList);
 
-    removeHidden([".save-list"])
+    removeHidden([".save-list", "dl"]);
+
+    // adding categories
+
+
 
     // TO-DO adding more info about the items
     const endAddingInfo = document.createElement("button");
 
-    infoBtn.addEventListener("click", () => {
+    infoBtn.addEventListener("click", function () {
       infoList.appendChild(priceBtn);
       priceBtn.textContent = "unit price (₺)";
       priceBtn.appendChild(priceInput);
       infoList.appendChild(amountBtn);
       amountBtn.textContent = "amount";
       amountBtn.appendChild(amountInput);
+      7;
       infoList.appendChild(endAddingInfo);
       endAddingInfo.textContent = "Done";
-      endAddingInfo.classList.add("done-btn")
+      endAddingInfo.classList.add("done-btn");
 
       listItem.removeChild(infoBtn);
     });
 
     const displayInfo = document.createElement("span");
-    displayInfo.classList.add("displayed-info")
-    const changeInfoBtn = document.createElement("button")
-    changeInfoBtn.classList.add("change-info-btn")
+    displayInfo.classList.add("displayed-info");
+    const changeInfoBtn = document.createElement("button");
+    changeInfoBtn.classList.add("change-info-btn");
 
     endAddingInfo.addEventListener("click", () => {
-
       infoList.removeChild(priceBtn);
       priceBtn.removeChild(priceInput);
       infoList.removeChild(amountBtn);
@@ -156,22 +187,26 @@ itemButton.addEventListener("click", function () {
       infoList.removeChild(endAddingInfo);
 
       // remove inputs and replace them with the values
-      let unitPrice = priceInput.value
-      let amount = amountInput.value
-      let totalPrice = unitPrice * amountInput.value
+      let unitPrice = priceInput.value;
+      let amount = amountInput.value;
+      let totalPrice = unitPrice * amountInput.value;
 
       infoList.appendChild(displayInfo);
 
       if (amountInput.value !== "" && priceInput.value !== "") {
         displayInfo.textContent = `total price: ${totalPrice}(₺), amount: ${amount}`;
+        displayInfo.appendChild(changeInfoBtn);
       } else if (amountInput.value !== "") {
         displayInfo.textContent = `amount: ${amountInput.value}`;
+        displayInfo.appendChild(changeInfoBtn);
       } else if (priceInput.value !== "") {
         displayInfo.textContent = `price: ${totalPrice}(₺)`;
+        displayInfo.appendChild(changeInfoBtn);
+      } else {
+        listItem.appendChild(infoBtn);
       }
 
-      displayInfo.appendChild(changeInfoBtn)
-      changeInfoBtn.textContent = "change information"
+      changeInfoBtn.textContent = "change information";
       changeInfoBtn.addEventListener("click", () => {
         infoList.appendChild(priceBtn);
         priceBtn.textContent = "price (₺)";
@@ -183,12 +218,10 @@ itemButton.addEventListener("click", function () {
         endAddingInfo.textContent = "Done";
 
         displayInfo.removeChild(changeInfoBtn);
-        console.log(typeof unitPrice)
-        console.log(typeof amountInput.value)
-        console.log(amount)
-      })
-      
-
+        console.log(typeof unitPrice);
+        console.log(typeof amountInput.value);
+        console.log(amount);
+      });
     });
 
     // deleting items from the list
@@ -197,7 +230,7 @@ itemButton.addEventListener("click", function () {
       items.indexOf(myItem);
       let dItems = items.splice(items.indexOf(myItem), 1);
 
-      deletedItems.push(dItems);
+      deletedItems.push(...dItems);
 
       infoList.removeChild(displayInfo);
     });
@@ -208,12 +241,20 @@ itemButton.addEventListener("click", function () {
   }
 });
 
+// const savedListsTitle = document.querySelector("your-lists");
+// const savedLists = document.querySelector("ul");
 
+// document.querySelector(".save-list").addEventListener("click", () => {
+//   let cloneList = list.cloneNode(true);
+//   let cloneListName = newListName.cloneNode(true);
 
-document.querySelector(".save-list").addEventListener("click", () => { 
-  // console.log(items)
-  // console.log(deletedItems)
-  // console.log(list)
+//   console.log(deletedItems);
+//   console.log(cloneList);
+//   console.log(cloneListName);
 
-})
+//   savedLists.appendChild(cloneListName);
+//   cloneListName.classList.add("clone-list-name");
+//   savedLists.appendChild(cloneList);
+//   cloneList.classList.add("cloned-list");
 
+// });
