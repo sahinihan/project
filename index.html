@@ -43,18 +43,30 @@
       </div>
 
       <div class="list-item">
+        <label for="categories"> Choose a category: </label>
+        <select name="categories" class="categories-list"> </select>
         <label class="p-item-name"> The name of your item: </label>
         <input class="item-name" type="text" placeholder="item"/>
         <button class="btn item-name-check"> OK </button>
-        <div id="radio-btn"> </div>
       </div>
       
       <p class="List-Name"> List Name</p>
-      <dl></dl>
+
+      <div class="lists"> 
+        <label> Food </label>
+        <dl class="Food"></dl>
+        <label> Health </label>
+        <dl class="Health"></dl>
+        <label> Cosmetics </label>
+        <dl class="Cosmetics"></dl>
+        <label> Clothing </label>
+        <dl class="Clothing"></dl>
+        <label> Other </label>
+        <dl class="Other"></dl>
+      </div>
 
       <button class="btn last-added-items">Last added items</button>
       <button class="btn save-list"> Save your new list </button>
-      <p class="your-lists"> Your Lists</p>
       <ul></ul>
 
     <script src="script.js"></script>
