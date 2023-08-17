@@ -37,32 +37,50 @@
       <button class="btn-create-list">Create a list!</button> 
 
       <div class="list-name-div">
-        <label class="p-list-name"> The name of your shopping list:</label>
-        <input class="list-name" type="text" placeholder="list name"/>
-        <button class="btn list-name-check"> OK!</button>
+        <div class="assign-list-name">
+          <label class="p-list-name"> The name of your shopping list:</label>
+          <input class="list-name" type="text" placeholder="list name"/>
+          <button class="btn list-name-check"> OK!</button>
+        </div>
+        <div>
+          <p class="List-Name"> List Name</p>
+        </div>
       </div>
 
       <div class="list-item">
-        <label for="categories"> Choose a category: </label>
-        <select name="categories" class="categories-list"> </select>
-        <label class="p-item-name"> The name of your item: </label>
-        <input class="item-name" type="text" placeholder="item"/>
-        <button class="btn item-name-check"> OK </button>
+        <div class="assign-category">
+          <label for="categories"> Choose a category: </label>
+          <select name="categories" class="categories-list"> </select>
+        </div>
+        <div class="assign-item">
+          <label class="p-item-name"> The name of your item: </label>
+          <input class="item-name" type="text" placeholder="item"/>
+          <button class="btn item-name-check"> OK </button>
+        </div>
       </div>
       
-      <p class="List-Name"> List Name</p>
 
-      <div class="lists"> 
-        <label> Food </label>
-        <dl class="Food"></dl>
-        <label> Health </label>
-        <dl class="Health"></dl>
-        <label> Cosmetics </label>
-        <dl class="Cosmetics"></dl>
-        <label> Clothing </label>
-        <dl class="Clothing"></dl>
-        <label> Other </label>
-        <dl class="Other"></dl>
+      <div class="category-lists"> 
+        <div class="Food"> 
+          <label> Food </label>
+          <dl class="Food"></dl>
+        </div>
+        <div class="Health"> 
+          <label> Health </label>
+          <dl class="Health"></dl>
+        </div>
+        <div class="Cosmetics">  
+          <label> Cosmetics </label>
+          <dl class="Cosmetics"></dl>
+        </div>
+        <div class="Clothing">
+          <label> Clothing </label>
+          <dl class="Clothing"></dl>
+        </div>
+        <div class="Other"> 
+          <label> Other </label>
+          <dl class="Other"></dl>
+        </div>
       </div>
 
       <button class="btn last-added-items">Last added items</button>

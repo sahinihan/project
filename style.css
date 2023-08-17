@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
 
 .hidden {
     display: none;
@@ -123,7 +123,8 @@ color: #1a2c53
 .create-list-title {
   position: relative;
   color:#1a2c53;
-  margin-left: 100px;
+  margin-left: 40px;
+  margin-bottom: 10px
 }
 
 .btn-create-list{
@@ -131,11 +132,15 @@ color: #1a2c53
   font-size: 17px;
   width: 120px;
   height: 50px;
-  margin-left: 192px
+  margin-left: 130px
+}
+.assign-list-name {
+  margin-bottom:20px;
+  margin-top:20px
 }
 
 .p-list-name{
-  margin-left: 65px;
+  margin-left: 40px;
 }
 
 .list-name-check{
@@ -149,11 +154,16 @@ color: #1a2c53
 }
 
 .list-item {
-  margin-left: 123px;
-  margin-top: 20px
+  margin-left: 40px;
+  margin-top: 7px;
+  margin-bottom: 20px
 }
 
-.item-name{
+.assign-item{
+  margin-top: 15px;
+}
+
+.item-name {
   background: #fbd1a2;
   border-color: #219ebc;
 }
@@ -163,23 +173,31 @@ color: #1a2c53
   background-color: #ee6c4d;
 }
 
+.list-name-div{
+  display: flex;
+  align-items: center;
+}
+
 .List-Name {
-  margin-left: 175px;
-  margin-top: 20px;
-  padding-top: 8px;
-  width: 190px;
-  height: 25px;
+  margin: 10px;
+  margin-left: 50px;
+  width: 400px;
+  font-size: 20px;
+  height: 40px;
+  padding: 10px;
   text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  word-spacing: 5px;
+  border-radius: 50px;
   background-color: #8ecae6;
 }
 
 .list-of-items {
-  margin-left: 100px;
+  display: flex;
+  flex-direction: column;
   margin-bottom: 5px;
-}
-
-.item-names {
-  margin: 3px
+  font-size: 15px;
 }
 
 .delete-btn {
@@ -198,7 +216,6 @@ color: #1a2c53
 .price-btn {
   background-color: #219ebc;
   margin: 5px;
-  margin-left: 100px;
 }
 
 .amount-btn {
@@ -223,8 +240,9 @@ color: #1a2c53
 }
 
 .displayed-info {
+  display:flex;
+  flex-direction: column;
   margin: 5px;
-  margin-left: 100px;
 }
 
 .change-info-btn{
@@ -233,9 +251,9 @@ color: #1a2c53
   border-radius: 40px;
 }
 
-.save-list {
-  margin-left: 375px;
-  background-color:#1a2c53;
-  color:#d2e5e5
+.category-lists{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
