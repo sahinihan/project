@@ -21,14 +21,14 @@ let budgetInfo = document.querySelector(".known-budget").textContent;
 let changeBudget = document.querySelector(".changing-the-budget");
 let btnChange = document.querySelector(".change-known-budget");
 let budgetAmount = 0;
-let itemPrices = {};
+let items = [];
 
 // recieving initial budget and portraying it
 const assignBudget = document
   .querySelector(".budget-check")
   .addEventListener("click", function () {
     let budget = Number(document.querySelector(".budget-number").value);
-    budgetAmount = Number(document.querySelector(".budget-number").value);
+    budgetAmount = budget;
     document.querySelector(".known-budget").classList.remove("hidden");
     document.querySelector(
       ".known-budget"
@@ -47,6 +47,7 @@ const change = (budget = document
       .querySelector(".changed-budget-check")
       .addEventListener("click", function () {
         let budget = Number(document.querySelector(".changed-budget").value);
+        budgetAmount = budget;
         document.querySelector(
           ".known-budget"
         ).textContent = `${budgetInfo} ${budget} Turkish liras `;
@@ -106,9 +107,10 @@ const itemButton = document.querySelector(".item-name-check");
 
 function updateTotalPrice() {
   let totalPrice = 0;
-  for (let itemName in itemPrices) {
-    totalPrice += itemPrices[itemName];
-  }
+  items.forEach((item) => {
+    totalPrice += item.price;
+    console.log(totalPrice);
+  });
 
   if (totalPrice > budgetAmount) {
     alert("Total price exceeds budget!");
@@ -186,10 +188,17 @@ itemButton.addEventListener("click", function () {
       let unitPrice = parseFloat(priceInput.value);
       let amount = parseFloat(amountInput.value);
       let itemTotalPrice = unitPrice * amount;
-      
-      let itemName = itemInput;
-      itemPrices[itemName] = itemTotalPrice;
-      console.log(itemPrices)
+
+      let itemId = Date.now().toString();
+
+      let newItem = {
+        id: itemId,
+        name: itemInput,
+        price: itemTotalPrice,
+      };
+
+      items.push(newItem);
+      console.log(items);
       updateTotalPrice();
 
       infoList.appendChild(displayInfo);
@@ -223,12 +232,14 @@ itemButton.addEventListener("click", function () {
         console.log(typeof amountInput.value);
         console.log(amount);
       });
-    });
 
-    // deleting items from the list
-    listBtn.addEventListener("click", () => {
-      list.removeChild(listItem);
-      infoList.removeChild(displayInfo);
+      // deleting items from the list
+      listBtn.addEventListener("click", () => {
+        list.removeChild(listItem);
+        infoList.removeChild(displayInfo);
+
+        items = items.filter((item) => item.id !== itemId);
+      });
     });
   }
 });
