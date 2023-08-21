@@ -22,7 +22,7 @@ let changeBudget = document.querySelector(".changing-the-budget");
 let btnChange = document.querySelector(".change-known-budget");
 let budgetAmount = 0;
 let items = [];
-let allLists =  document.querySelector(".category-lists");
+let allLists = document.querySelector(".category-lists");
 let saveBtn = document.querySelector(".save-list");
 
 // recieving initial budget and portraying it
@@ -123,7 +123,7 @@ function updateTotalPrice() {
 itemButton.addEventListener("click", function () {
   let selectedCategory = categoryList.value;
   const itemInput = document.querySelector(".item-name").value;
-  removeHidden([".save-list"])
+  removeHidden([".save-list"]);
 
   if (itemInput.value !== "") {
     const listItem = document.createElement("dt");
@@ -180,6 +180,7 @@ itemButton.addEventListener("click", function () {
     const changeInfoBtn = document.createElement("button");
     changeInfoBtn.classList.add("change-info-btn");
 
+    let itemId = Date.now().toString();
     endAddingInfo.addEventListener("click", () => {
       infoList.removeChild(priceBtn);
       priceBtn.removeChild(priceInput);
@@ -192,7 +193,6 @@ itemButton.addEventListener("click", function () {
       let amount = parseFloat(amountInput.value);
       let itemTotalPrice = unitPrice * amount;
 
-      let itemId = Date.now().toString();
 
       let newItem = {
         id: itemId,
@@ -232,23 +232,18 @@ itemButton.addEventListener("click", function () {
         endAddingInfo.textContent = "Done";
 
         items = items.filter((item) => item.id !== itemId);
-        newItem["price"] = itemTotalPrice
+        newItem["price"] = itemTotalPrice;
 
         displayInfo.removeChild(changeInfoBtn);
-        
-        listBtn.addEventListener("click", () => {
-          items = items.filter((item) => item.id !== itemId);
-        });
-
       });
+    });
 
-      // deleting items from the list
-      listBtn.addEventListener("click", () => {
-        items = items.filter((item) => item.id !== itemId);
+    // deleting items from the list
+    listBtn.addEventListener("click", () => {
+      items = items.filter((item) => item.id !== itemId);
 
-        list.removeChild(listItem);
-        infoList.removeChild(displayInfo);
-      });
+      list.removeChild(listItem);
+      infoList.removeChild(displayInfo);
     });
   }
 });
