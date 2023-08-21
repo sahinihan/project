@@ -155,9 +155,9 @@ itemButton.addEventListener("click", function () {
     infoList.appendChild(infoBtn);
     infoList.appendChild(listBtn);
 
-    // adding more info about the items
     const endAddingInfo = document.createElement("button");
 
+    // adding more info about the items
     infoBtn.addEventListener("click", function () {
       infoList.appendChild(priceBtn);
       priceBtn.textContent = "unit price (₺)";
@@ -177,32 +177,34 @@ itemButton.addEventListener("click", function () {
     const changeInfoBtn = document.createElement("button");
     changeInfoBtn.classList.add("change-info-btn");
 
+    
     endAddingInfo.addEventListener("click", () => {
       infoList.removeChild(priceBtn);
       priceBtn.removeChild(priceInput);
       infoList.removeChild(amountBtn);
       amountBtn.removeChild(amountInput);
       infoList.removeChild(endAddingInfo);
-
+      
       // remove inputs and replace them with the values
       let unitPrice = parseFloat(priceInput.value);
       let amount = parseFloat(amountInput.value);
       let itemTotalPrice = unitPrice * amount;
-
+      
       let itemId = Date.now().toString();
-
+      
       let newItem = {
         id: itemId,
         name: itemInput,
         price: itemTotalPrice,
+        amount: amount,
       };
-
+      
       items.push(newItem);
       console.log(items);
       updateTotalPrice();
-
+      
       infoList.appendChild(displayInfo);
-
+      
       if (amountInput.value !== "" && priceInput.value !== "") {
         displayInfo.textContent = `total price: ${itemTotalPrice}(₺), amount: ${amount}`;
         displayInfo.appendChild(changeInfoBtn);
@@ -215,7 +217,7 @@ itemButton.addEventListener("click", function () {
       } else {
         listItem.appendChild(infoBtn);
       }
-
+      
       changeInfoBtn.textContent = "change information";
       changeInfoBtn.addEventListener("click", () => {
         infoList.appendChild(priceBtn);
@@ -226,20 +228,17 @@ itemButton.addEventListener("click", function () {
         amountBtn.appendChild(amountInput);
         infoList.appendChild(endAddingInfo);
         endAddingInfo.textContent = "Done";
-
+        
         displayInfo.removeChild(changeInfoBtn);
-        console.log(typeof unitPrice);
-        console.log(typeof amountInput.value);
-        console.log(amount);
       });
-
+      
       // deleting items from the list
       listBtn.addEventListener("click", () => {
         list.removeChild(listItem);
         infoList.removeChild(displayInfo);
-
+  
         items = items.filter((item) => item.id !== itemId);
       });
-    });
+  });
   }
 });
