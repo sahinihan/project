@@ -160,8 +160,7 @@ itemButton.addEventListener("click", function () {
 
     const endAddingInfo = document.createElement("button");
 
-    // adding more info about the items
-    infoBtn.addEventListener("click", function () {
+    function createInfoInputsF() {
       infoList.appendChild(priceBtn);
       priceBtn.textContent = "unit price (₺)";
       priceBtn.appendChild(priceInput);
@@ -171,7 +170,11 @@ itemButton.addEventListener("click", function () {
       infoList.appendChild(endAddingInfo);
       endAddingInfo.textContent = "Done";
       endAddingInfo.classList.add("done-btn");
+    }
 
+    // adding more info about the items
+    infoBtn.addEventListener("click", function () {
+      createInfoInputsF();
       infoList.removeChild(infoBtn);
     });
 
@@ -192,7 +195,6 @@ itemButton.addEventListener("click", function () {
       let unitPrice = parseFloat(priceInput.value);
       let amount = parseFloat(amountInput.value);
       let itemTotalPrice = unitPrice * amount;
-
 
       let newItem = {
         id: itemId,
@@ -222,14 +224,7 @@ itemButton.addEventListener("click", function () {
 
       changeInfoBtn.textContent = "change information";
       changeInfoBtn.addEventListener("click", () => {
-        infoList.appendChild(priceBtn);
-        priceBtn.textContent = "price (₺)";
-        priceBtn.appendChild(priceInput);
-        infoList.appendChild(amountBtn);
-        amountBtn.textContent = "amount";
-        amountBtn.appendChild(amountInput);
-        infoList.appendChild(endAddingInfo);
-        endAddingInfo.textContent = "Done";
+        createInfoInputsF();
 
         items = items.filter((item) => item.id !== itemId);
         newItem["price"] = itemTotalPrice;
