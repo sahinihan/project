@@ -20,41 +20,44 @@ let budget = document.querySelector(".budget-number");
 let budgetInfo = document.querySelector(".known-budget").textContent;
 let changeBudget = document.querySelector(".changing-the-budget");
 let btnChange = document.querySelector(".change-known-budget");
+
+let budgetBtn = document.querySelector(".budget-check");
+let changedBudgetBtn = document.querySelector(".changed-budget-check");
+
 let budgetAmount = 0;
 let items = [];
+let itemNames = [];
 let allLists = document.querySelector(".category-lists");
 let saveBtn = document.querySelector(".save-list");
 
 // recieving initial budget and portraying it
-const assignBudget = document
-  .querySelector(".budget-check")
-  .addEventListener("click", function () {
-    let budget = Number(document.querySelector(".budget-number").value);
-    budgetAmount = budget;
-    document.querySelector(".known-budget").classList.remove("hidden");
-    document.querySelector(
-      ".known-budget"
-    ).textContent = `${budgetInfo} ${budget} Turkish liras`;
-    hide([".budget-form", ".budget-number", ".budget-check", ".assign-budget"]);
+const assignBudget = budgetBtn.addEventListener("click", function () {
+  let budget = Number(document.querySelector(".budget-number").value);
+  budgetAmount = budget;
+  document.querySelector(".known-budget").classList.remove("hidden");
+  document.querySelector(
+    ".known-budget"
+  ).textContent = `${budgetInfo} ${budget} Turkish liras`;
+  hide([".budget-form", ".budget-number", ".budget-check", ".assign-budget"]);
 
-    removeHidden([".change-known-budget"]);
-  });
+  removeHidden([".change-known-budget"]);
+  saveBudget();
+});
 
 // changing the budget
 const change = (budget = document
   .querySelector(".change-known-budget")
   .addEventListener("click", function () {
     removeHidden([".changing-the-budget"]);
-    document
-      .querySelector(".changed-budget-check")
-      .addEventListener("click", function () {
-        let budget = Number(document.querySelector(".changed-budget").value);
-        budgetAmount = budget;
-        document.querySelector(
-          ".known-budget"
-        ).textContent = `${budgetInfo} ${budget} Turkish liras `;
-        hide([".changing-the-budget"]);
-      });
+    changedBudgetBtn.addEventListener("click", function () {
+      let budget = Number(document.querySelector(".changed-budget").value);
+      budgetAmount = budget;
+      document.querySelector(
+        ".known-budget"
+      ).textContent = `${budgetInfo} ${budget} Turkish liras `;
+      hide([".changing-the-budget"]);
+      saveBudget();
+    });
   }));
 
 const listName = document.querySelector(".p-list-name");
@@ -77,47 +80,16 @@ const ShowListName = document
       removeHidden([".list-item", ".List-Name"]);
       let newListN = listNameInput.value;
       newListName.textContent = newListN;
+      saveListName();
     }
   });
 
 // adding categories
 const categoryList = document.querySelector(".categories-list");
-function createCategoriesF() {
-  let food = document.createElement("option");
-  food.textContent = "Food";
-  categoryList.add(food);
 
-  let health = document.createElement("option");
-  health.textContent = "Health";
-  categoryList.add(health);
-
-  let cosmetics = document.createElement("option");
-  cosmetics.textContent = "Cosmetics";
-  categoryList.add(cosmetics);
-
-  let clothes = document.createElement("option");
-  clothes.textContent = "Clothing";
-  categoryList.add(clothes);
-
-  let other = document.createElement("option");
-  other.textContent = "Other";
-  categoryList.add(other);
-}
 createCategoriesF();
 
 const itemButton = document.querySelector(".item-name-check");
-
-function updateTotalPrice() {
-  let totalPrice = 0;
-  items.forEach((item) => {
-    totalPrice += item.price;
-    console.log(totalPrice);
-  });
-
-  if (totalPrice > budgetAmount) {
-    alert("Total price exceeds budget!");
-  }
-}
 
 // adding items to the list
 itemButton.addEventListener("click", function () {
@@ -129,6 +101,10 @@ itemButton.addEventListener("click", function () {
     const listItem = document.createElement("dt");
     listItem.textContent = itemInput;
     listItem.classList.add("list-of-items");
+
+    itemNames.push(itemInput);
+    console.log(itemNames);
+    saveItems2();
 
     const listBtn = document.createElement("button");
     const infoBtn = document.createElement("button");
@@ -236,9 +212,82 @@ itemButton.addEventListener("click", function () {
     // deleting items from the list
     listBtn.addEventListener("click", () => {
       items = items.filter((item) => item.id !== itemId);
+      for (let i = 0; i < itemNames.length; i++) {
+        if (itemNames[i] == itemInput) {
+          itemNames.splice(i, 1);
+          localStorage.removeItem(`item_${i + 1}`);
+          break;
+        }
+      }
 
       list.removeChild(listItem);
       infoList.removeChild(displayInfo);
     });
   }
 });
+
+function createCategoriesF() {
+  let food = document.createElement("option");
+  food.textContent = "Food";
+  categoryList.add(food);
+
+  let health = document.createElement("option");
+  health.textContent = "Health";
+  categoryList.add(health);
+
+  let cosmetics = document.createElement("option");
+  cosmetics.textContent = "Cosmetics";
+  categoryList.add(cosmetics);
+
+  let clothes = document.createElement("option");
+  clothes.textContent = "Clothing";
+  categoryList.add(clothes);
+
+  let other = document.createElement("option");
+  other.textContent = "Other";
+  categoryList.add(other);
+}
+
+function updateTotalPrice() {
+  let totalPrice = 0;
+  items.forEach((item) => {
+    totalPrice += item.price;
+    console.log(totalPrice);
+  });
+
+  if (totalPrice > budgetAmount) {
+    alert("Total price exceeds budget!");
+  }
+}
+
+function saveBudget() {
+  const currentBudget = budgetAmount;
+
+  if (typeof Storage !== "undefined") {
+    const timestamp = new Date().getTime();
+    const key = "savedBudget_" + timestamp;
+
+    localStorage.setItem(key, currentBudget);
+  }
+}
+
+function saveListName() {
+  const currenListName = listNameInput.value;
+
+  if (typeof Storage !== "undefined") {
+    const timestamp = new Date().getTime();
+    const key = "savedListName_" + timestamp;
+
+    localStorage.setItem(key, currenListName);
+  }
+}
+
+function saveItems2() {
+  if (typeof Storage !== "undefined") {
+    localStorage.removeItem("savedItems");
+    for (let i = 0; i < itemNames.length; i++) {
+      const key = `item_${i + 1}`;
+      localStorage.setItem(key, itemNames[i]);
+    }
+  }
+}
