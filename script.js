@@ -264,10 +264,11 @@ function saveBudget() {
   const currentBudget = budgetAmount;
 
   if (typeof Storage !== "undefined") {
-    const timestamp = new Date().getTime();
-    const key = "savedBudget_" + timestamp;
-
-    localStorage.setItem(key, currentBudget);
+    if (localStorage.getItem("savedBudget")) {
+      localStorage.setItem("savedBudget", currentBudget);
+    } else {
+      localStorage.setItem("savedBudget", currentBudget);
+    }
   }
 }
 
@@ -275,10 +276,11 @@ function saveListName() {
   const currenListName = listNameInput.value;
 
   if (typeof Storage !== "undefined") {
-    const timestamp = new Date().getTime();
-    const key = "savedListName_" + timestamp;
-
-    localStorage.setItem(key, currenListName);
+    if (localStorage.getItem("savedListName")) {
+      localStorage.setItem("savedListName", currenListName)
+    } else {
+      localStorage.setItem("savedListName", currenListName);
+    }
   }
 }
 
