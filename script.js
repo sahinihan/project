@@ -31,7 +31,7 @@ let allLists = document.querySelector(".category-lists");
 let saveBtn = document.querySelector(".save-list");
 
 // recieving initial budget and portraying it
-const assignBudget = budgetBtn.addEventListener("click", function () {
+const assignBudget = budgetBtn.addEventListener("click", function budgetF() {
   let budget = Number(document.querySelector(".budget-number").value);
   budgetAmount = budget;
   document.querySelector(".known-budget").classList.remove("hidden");
@@ -39,9 +39,8 @@ const assignBudget = budgetBtn.addEventListener("click", function () {
     ".known-budget"
   ).textContent = `${budgetInfo} ${budget} Turkish liras`;
   hide([".budget-form", ".budget-number", ".budget-check", ".assign-budget"]);
-
-  removeHidden([".change-known-budget"]);
   saveBudget();
+  removeHidden([".change-known-budget"]);
 });
 
 // changing the budget
@@ -277,7 +276,7 @@ function saveListName() {
 
   if (typeof Storage !== "undefined") {
     if (localStorage.getItem("savedListName")) {
-      localStorage.setItem("savedListName", currenListName)
+      localStorage.setItem("savedListName", currenListName);
     } else {
       localStorage.setItem("savedListName", currenListName);
     }
@@ -292,4 +291,39 @@ function saveItems2() {
       localStorage.setItem(key, itemNames[i]);
     }
   }
+}
+
+function doesSavedListNameExist() {
+  return localStorage.getItem("savedListName") !== null;
+}
+const hasSavedListName = doesSavedListNameExist();
+
+function doesSavedBudgetExist() {
+  return localStorage.getItem("savedBudget") !== null;
+}
+const hasSavedBudget = doesSavedBudgetExist();
+
+if (hasSavedListName) {
+  removeHidden([
+    ".List-Name",
+    ".list-item",
+    ".p-list-name",
+    ".list-name",
+    ".list-name-check",
+  ]);
+  hide([".btn-create-list", ".create-list-title"]);
+  window.addEventListener("load", function () {
+    newListName.textContent = localStorage.getItem("savedListName");
+  });
+}
+
+if (hasSavedBudget) {
+  hide([".budget-form", ".budget-number", ".budget-check", ".assign-budget"]);
+  removeHidden([".change-known-budget", ".known-budget"]);
+  window.addEventListener("load", function () {
+    budget = parseFloat(this.localStorage.getItem("savedBudget"));
+    document.querySelector(
+      ".known-budget"
+    ).textContent = `${budgetInfo} ${budget} Turkish liras`;
+  });
 }
