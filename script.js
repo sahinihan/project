@@ -14,7 +14,7 @@ hide([".known-budget", ".change-known-budget", ".changing-the-budget"]);
 hide([".p-list-name", ".list-name", ".list-name-check", ".List-Name"]);
 hide([".Food", ".Health", ".Clothing", ".Cosmetics", ".Other"]);
 hide([".list-item", ".last-added-list", ".last-added-list-label"]);
-hide([".save-list"]);
+hide([".reset-list"]);
 
 let budget = document.querySelector(".budget-number");
 let budgetInfo = document.querySelector(".known-budget").textContent;
@@ -31,7 +31,7 @@ let lastAddedItems = [];
 
 let lastAddedList = document.querySelector(".last-added-list");
 let allLists = document.querySelector(".category-lists");
-let saveBtn = document.querySelector(".save-list");
+let resetBtn = document.querySelector(".reset-list");
 
 // recieving initial budget and portraying it
 const assignBudget = budgetBtn.addEventListener("click", function budgetF() {
@@ -97,7 +97,7 @@ const itemButton = document.querySelector(".item-name-check");
 itemButton.addEventListener("click", function () {
   let selectedCategory = categoryList.value;
   const itemInput = document.querySelector(".item-name").value;
-  removeHidden([".save-list", ".last-added-list", ".last-added-list-label"]);
+  removeHidden([".reset-list", ".last-added-list", ".last-added-list-label"]);
 
   if (itemInput.value !== "") {
     const listItem = document.createElement("dt");
@@ -133,6 +133,26 @@ itemButton.addEventListener("click", function () {
     const list = document.querySelector(`.${selectedCategory}`);
     removeHidden([`.${selectedCategory}`]);
     list.appendChild(listItem);
+
+    function resetList() {
+      while (list.firstChild) {
+        list.removeChild(list.firstChild)
+      }
+    }
+
+    resetBtn.addEventListener("click", function(){
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith("item")){
+          localStorage.removeItem(key)
+        }}
+      resetList()
+      lastAddedItems.length = 0
+      itemNames.length = 0
+      hide([".last-added-list", ".last-added-list-label"])
+      console.log(lastAddedItems)
+      console.log(itemNames)
+    })
 
     listItem.appendChild(infoList);
     infoList.appendChild(infoBtn);
@@ -372,5 +392,9 @@ function createLastAddedItemsList() {
     lastAddedList.appendChild(lastAddedI);
     lastAddedI.classList.add("last-added-items");
     lastAddedI.textContent = itemNameStr;
+
+    resetBtn.addEventListener("click", function(){
+      lastAddedList.innerHTML = ""
+    })
   }
 }
