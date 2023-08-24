@@ -101,7 +101,7 @@ itemButton.addEventListener("click", function () {
     listItem.textContent = itemInput;
     listItem.classList.add("list-of-items");
 
-    itemNames.push(itemInput);
+    itemNames.push(`${selectedCategory}_${itemInput}`);
     console.log(itemNames);
     saveItems2();
 
@@ -211,8 +211,9 @@ itemButton.addEventListener("click", function () {
     // deleting items from the list
     listBtn.addEventListener("click", () => {
       items = items.filter((item) => item.id !== itemId);
+
       for (let i = 0; i < itemNames.length; i++) {
-        if (itemNames[i] == itemInput) {
+        if (itemNames[i] == `${selectedCategory}_${itemInput}`) {
           itemNames.splice(i, 1);
           localStorage.removeItem(`item_${i + 1}`);
           break;
@@ -326,4 +327,20 @@ if (hasSavedBudget) {
       ".known-budget"
     ).textContent = `${budgetInfo} ${budget} Turkish liras`;
   });
+}
+
+function createListFromLocalStorage() {
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key.startsWith("item")) {
+      const [category, itemStr] = localStorage.getItem(key).split("_");
+
+      const list = document.querySelector(`.${category}`);
+      removeHidden([`.${category}`]);
+    }
+  }
+}
+
+window.onload = function() {
+  createListFromLocalStorage();
 }
