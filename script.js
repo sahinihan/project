@@ -13,7 +13,7 @@ const removeHidden = function (arr) {
 hide([".known-budget", ".change-known-budget", ".changing-the-budget"]);
 hide([".p-list-name", ".list-name", ".list-name-check", ".List-Name"]);
 hide([".Food", ".Health", ".Clothing", ".Cosmetics", ".Other"]);
-hide([".list-item", ".last-added-items"]);
+hide([".list-item", ".last-added-list", ".last-added-list-label"]);
 hide([".save-list"]);
 
 let budget = document.querySelector(".budget-number");
@@ -27,6 +27,9 @@ let changedBudgetBtn = document.querySelector(".changed-budget-check");
 let budgetAmount = 0;
 let items = [];
 let itemNames = [];
+let lastAddedItems = [];
+
+let lastAddedList = document.querySelector(".last-added-list");
 let allLists = document.querySelector(".category-lists");
 let saveBtn = document.querySelector(".save-list");
 
@@ -94,7 +97,7 @@ const itemButton = document.querySelector(".item-name-check");
 itemButton.addEventListener("click", function () {
   let selectedCategory = categoryList.value;
   const itemInput = document.querySelector(".item-name").value;
-  removeHidden([".save-list"]);
+  removeHidden([".save-list", ".last-added-list", ".last-added-list-label"]);
 
   if (itemInput.value !== "") {
     const listItem = document.createElement("dt");
@@ -104,6 +107,8 @@ itemButton.addEventListener("click", function () {
     itemNames.push(`${selectedCategory}_${itemInput}`);
     console.log(itemNames);
     saveItems2();
+    lastAddedItemsFunction();
+    createLastAddedItemsList();
 
     const listBtn = document.createElement("button");
     const infoBtn = document.createElement("button");
@@ -341,6 +346,31 @@ function createListFromLocalStorage() {
   }
 }
 
-window.onload = function() {
+window.addEventListener("load", function () {
   createListFromLocalStorage();
+});
+
+function lastAddedItemsFunction() {
+  const lastAdded = itemNames.slice(-1);
+  lastAddedItems.push([...lastAdded]);
+  if (lastAddedItems.length === 6) {
+    lastAddedItems.shift();
+  }
+  console.log(lastAddedItems, lastAddedItems.length);
+}
+
+function createLastAddedItemsList() {
+  while (lastAddedList.firstChild) {
+    lastAddedList.removeChild(lastAddedList.firstChild);
+  }
+
+  for (let i = 0; i < lastAddedItems.length; i++) {
+    let [category, itemNameStr] = lastAddedItems[i][0].split("_");
+    console.log(category, itemNameStr);
+
+    let lastAddedI = document.createElement("li");
+    lastAddedList.appendChild(lastAddedI);
+    lastAddedI.classList.add("last-added-items");
+    lastAddedI.textContent = itemNameStr;
+  }
 }
