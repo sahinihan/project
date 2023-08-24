@@ -352,9 +352,9 @@ window.addEventListener("load", function () {
 
 function lastAddedItemsFunction() {
   const lastAdded = itemNames.slice(-1);
-  lastAddedItems.push([...lastAdded]);
+  lastAddedItems.unshift(lastAdded);
   if (lastAddedItems.length === 6) {
-    lastAddedItems.shift();
+    lastAddedItems.pop();
   }
   console.log(lastAddedItems, lastAddedItems.length);
 }
