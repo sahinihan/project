@@ -14,7 +14,7 @@ hide([".known-budget", ".change-known-budget", ".changing-the-budget"]);
 hide([".p-list-name", ".list-name", ".list-name-check", ".List-Name"]);
 hide([".Food", ".Health", ".Clothing", ".Cosmetics", ".Other"]);
 hide([".list-item", ".last-added-list", ".last-added-list-label"]);
-hide([".reset-list"]);
+hide([".reset-list", ".favorited-list-label", ".favorited-list"]);
 
 let budget = document.querySelector(".budget-number");
 let budgetInfo = document.querySelector(".known-budget").textContent;
@@ -28,8 +28,10 @@ let budgetAmount = 0;
 let items = [];
 let itemNames = [];
 let lastAddedItems = [];
+let favoritedItems = new Set([]);
 
 let lastAddedList = document.querySelector(".last-added-list");
+let favoritedList = document.querySelector(".favorited-list");
 let allLists = document.querySelector(".category-lists");
 let resetBtn = document.querySelector(".reset-list");
 
@@ -92,69 +94,64 @@ const categoryList = document.querySelector(".categories-list");
 createCategoriesF();
 
 const itemButton = document.querySelector(".item-name-check");
+const itemInputInitial = document.querySelector(".item-name");
 
 // adding items to the list
 itemButton.addEventListener("click", function () {
-  let selectedCategory = categoryList.value;
-  const itemInput = document.querySelector(".item-name").value;
+  const itemInput = itemInputInitial.value
   removeHidden([".reset-list", ".last-added-list", ".last-added-list-label"]);
 
-  if (itemInput.value !== "") {
+  if (itemInputInitial.value !== "") {
     const listItem = document.createElement("dt");
     listItem.textContent = itemInput;
     listItem.classList.add("list-of-items");
 
+    const listBtn = document.createElement("button");
+    listBtn.classList.add("delete-btn");
+    listBtn.textContent = "Delete";
+
+    const infoBtn = document.createElement("button");
+    infoBtn.classList.add("info-btn");
+    infoBtn.textContent = "additional information";
+
+    const infoList = document.createElement("dd");
+
+    const priceBtn = document.createElement("button");
+    priceBtn.classList.add("price-btn");
+
+    const amountBtn = document.createElement("button");
+    amountBtn.classList.add("amount-btn");
+
+    const priceInput = document.createElement("input");
+    priceInput.classList.add("price-input");
+    priceInput.type = "number";
+
+    const amountInput = document.createElement("input");
+    amountInput.classList.add("amount-input");
+    amountInput.type = "number";
+
+    const favoriteBtn = document.createElement("button");
+    favoriteBtn.classList.add("favorite-btn");
+    favoriteBtn.textContent = "❤️";
+
+    let selectedCategory = categoryList.value;
+
+    favoriteBtn.addEventListener("click", function () {
+      favoritedItems.add(itemInput);
+      removeHidden([".favorited-list-label", ".favorited-list"]);
+      createFavoritedItemsList();
+    });
+
     itemNames.push(`${selectedCategory}_${itemInput}`);
-    console.log(itemNames);
     saveItems2();
     lastAddedItemsFunction();
     createLastAddedItemsList();
 
-    const listBtn = document.createElement("button");
-    const infoBtn = document.createElement("button");
-    const infoList = document.createElement("dd");
-    const priceBtn = document.createElement("button");
-    const amountBtn = document.createElement("button");
-    const priceInput = document.createElement("input");
-    const amountInput = document.createElement("input");
-
-    listBtn.classList.add("delete-btn");
-    infoBtn.classList.add("info-btn");
-    priceBtn.classList.add("price-btn");
-    amountBtn.classList.add("amount-btn");
-
-    priceInput.type = "number";
-    priceInput.classList.add("price-input");
-    amountInput.type = "number";
-    amountInput.classList.add("amount-input");
-    infoBtn.textContent = "additional information";
-    listBtn.textContent = "Delete";
-
     const list = document.querySelector(`.${selectedCategory}`);
     removeHidden([`.${selectedCategory}`]);
     list.appendChild(listItem);
-
-    function resetList() {
-      while (list.firstChild) {
-        list.removeChild(list.firstChild)
-      }
-    }
-
-    resetBtn.addEventListener("click", function(){
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key.startsWith("item")){
-          localStorage.removeItem(key)
-        }}
-      resetList()
-      lastAddedItems.length = 0
-      itemNames.length = 0
-      hide([".last-added-list", ".last-added-list-label"])
-      console.log(lastAddedItems)
-      console.log(itemNames)
-    })
-
     listItem.appendChild(infoList);
+    infoList.appendChild(favoriteBtn);
     infoList.appendChild(infoBtn);
     infoList.appendChild(listBtn);
 
@@ -376,7 +373,6 @@ function lastAddedItemsFunction() {
   if (lastAddedItems.length === 6) {
     lastAddedItems.pop();
   }
-  console.log(lastAddedItems, lastAddedItems.length);
 }
 
 function createLastAddedItemsList() {
@@ -386,15 +382,38 @@ function createLastAddedItemsList() {
 
   for (let i = 0; i < lastAddedItems.length; i++) {
     let [category, itemNameStr] = lastAddedItems[i][0].split("_");
-    console.log(category, itemNameStr);
 
     let lastAddedI = document.createElement("li");
     lastAddedList.appendChild(lastAddedI);
     lastAddedI.classList.add("last-added-items");
     lastAddedI.textContent = itemNameStr;
+  }
+}
 
-    resetBtn.addEventListener("click", function(){
-      lastAddedList.innerHTML = ""
-    })
+function createFavoritedItemsList() {
+  while (favoritedList.firstChild) {
+    favoritedList.removeChild(favoritedList.firstChild);
+  }
+
+  let favoritedArray = [...favoritedItems];
+
+  for (let i = 0; i < favoritedArray.length; i++) {
+    let itemName = favoritedArray[i];
+    let favoritedI = document.createElement("li");
+    favoritedList.appendChild(favoritedI);
+    favoritedI.classList.add("favorited-items");
+    favoritedI.textContent = itemName;
+
+    let addFavoritedToLisBtn = document.createElement("button");
+    addFavoritedToLisBtn.classList.add("add-favorited-check");
+    addFavoritedToLisBtn.textContent = "+";
+
+    favoritedI.appendChild(addFavoritedToLisBtn);
+
+    
+    addFavoritedToLisBtn.addEventListener("click", function(){
+      itemInputInitial.value = itemName
+      itemButton.click()
+    });
   }
 }
