@@ -98,7 +98,7 @@ const itemInputInitial = document.querySelector(".item-name");
 
 // adding items to the list
 itemButton.addEventListener("click", function () {
-  const itemInput = itemInputInitial.value
+  const itemInput = itemInputInitial.value;
   removeHidden([".reset-list", ".last-added-list", ".last-added-list-label"]);
 
   if (itemInputInitial.value !== "") {
@@ -408,12 +408,27 @@ function createFavoritedItemsList() {
     addFavoritedToLisBtn.classList.add("add-favorited-check");
     addFavoritedToLisBtn.textContent = "+";
 
-    favoritedI.appendChild(addFavoritedToLisBtn);
+    let deleteFromFavoritesBtn = document.createElement("button");
+    deleteFromFavoritesBtn.classList.add(".delete-from-favorties");
+    deleteFromFavoritesBtn.textContent = "-";
 
-    
-    addFavoritedToLisBtn.addEventListener("click", function(){
-      itemInputInitial.value = itemName
-      itemButton.click()
+    favoritedI.appendChild(addFavoritedToLisBtn);
+    favoritedI.appendChild(deleteFromFavoritesBtn);
+
+    deleteFromFavoritesBtn.addEventListener("click", function () {
+      favoritedItems.delete(itemName);
+
+      const index = favoritedArray.indexOf(itemName);
+      if (index !== -1) {
+        favoritedArray.splice(index, 1);
+      }
+
+      createFavoritedItemsList();
+    });
+
+    addFavoritedToLisBtn.addEventListener("click", function () {
+      itemInputInitial.value = itemName;
+      itemButton.click();
     });
   }
 }
